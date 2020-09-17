@@ -1,8 +1,8 @@
 import React from 'react';
-import AtlasFlix from './components/AtlasFlix';
+import Home from './components/Home';
 
 function App() {
-	return <AtlasFlix />;
+	return <Home />;
 }
 
 export default App;
