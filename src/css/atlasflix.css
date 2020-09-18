@@ -6,6 +6,7 @@ body {
 
 .home-container {
 	width: 100%;
+	height: 100%;
 	background-color: rgb(132, 0, 255);
 	color: rgb(113, 255, 231);
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -28,4 +29,10 @@ body {
 
 .text-field[type='text']:focus {
 	width: 100%;
+}
+
+.page-title {
+	font-family: 'Courier New', Courier, monospace;
+	color: rgb(176, 255, 72);
+	padding: 20px;
 }
