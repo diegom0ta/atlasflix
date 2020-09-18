@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { fetchMovies } from '../../api/fetchMovies';
 import '../../css/atlasflix.css';
-import MovieDetails from '../MovieDetails';
 
 export default class MoviesList extends Component {
 	state = {
+		image: '',
 		favorites: [],
 		loading: false,
 		title: '',
 		movies: ''
 	};
 
+	/* Handles the search in input field,
+	fetching in live the information from the API,
+	triggered by onChange property */
 	handleSearch(e) {
 		const value = e.target.value;
 		fetchMovies(value)
@@ -21,7 +23,8 @@ export default class MoviesList extends Component {
 					.then((data) => {
 						this.setState({
 							title: value,
-							movies: data
+							movies: data,
+							image: data.Poster
 						});
 					})
 					.catch((err) => console.log('Error', err));
@@ -29,6 +32,8 @@ export default class MoviesList extends Component {
 			.catch((err) => console.log('Error', err));
 	}
 
+	/* Adds result object from search in state array,
+	triggered by onClick button */
 	addFavorite = (e) => {
 		const favorite = this.state.movies;
 		this.setState({
@@ -40,46 +45,38 @@ export default class MoviesList extends Component {
 
 	render() {
 		return (
-			<Router>
-				<div>
-					<div className='page-title'>
-						<h1>AtlasFlix</h1>
-					</div>
-					<div>
-						<form>
-							<input
-								className='text-field'
-								id='search'
-								type='text'
-								placeholder='Search by movie title'
-								value={this.state.title}
-								onChange={(e) => this.handleSearch(e)}
-							/>
-							<button
-								onClick={(e) => this.addFavorite(e)}
-								type='button'
-								title='Like!'
-							>
-								Like!
-							</button>
-						</form>
-					</div>
-					<div>
-						<Link to={`/${this.state.movies.Title}`}>
-							<h2>{this.state.movies.Title}</h2>
-						</Link>
-						<h4>{this.state.movies.Year}</h4>
-					</div>
-					<Switch>
-						<Route path='/'>
-							<MoviesList />
-						</Route>
-						<Route path={`/${this.state.movies.Title}`}>
-							<MovieDetails {...this.state.movies} />
-						</Route>
-					</Switch>
+			<div>
+				<div className='page-title'>
+					<h1>AtlasFlix</h1>
 				</div>
-			</Router>
+				<div>
+					<form>
+						<input
+							className='text-field'
+							id='search'
+							type='text'
+							placeholder='Search by movie title'
+							value={this.state.title}
+							onChange={(e) => this.handleSearch(e)}
+						/>
+						<button
+							className='button1'
+							onClick={(e) => this.addFavorite(e)}
+							type='button'
+							title='Like!'
+						>
+							Like!
+						</button>
+					</form>
+				</div>
+				<div className='result-container'>
+					<h2>{this.state.movies.Title}</h2>
+
+					<h4>{this.state.movies.Year}</h4>
+
+					<img src={this.state.image} alt='' />
+				</div>
+			</div>
 		);
 	}
 }

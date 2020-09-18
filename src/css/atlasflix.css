@@ -8,12 +8,12 @@ body {
 	width: 100%;
 	height: 100%;
 	background-color: rgb(132, 0, 255);
-	color: rgb(113, 255, 231);
+	color: rgb(167, 135, 255);
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .text-field {
-	border: 2px solid rgb(167, 135, 255);
+	border: 5px solid rgb(167, 135, 255);
 	width: 300px;
 	box-sizing: border-box;
 	border-radius: 4px;
@@ -35,4 +35,26 @@ body {
 	font-family: 'Courier New', Courier, monospace;
 	color: rgb(176, 255, 72);
 	padding: 20px;
+}
+
+.result-container {
+	width: 640px;
+	height: auto;
+	margin: 0 auto;
+	padding: 10px;
+	position: relative;
+}
+
+.button1 {
+	background-color: rgb(167, 135, 255);
+	border: none;
+	color: rgb(176, 255, 72);
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+	border-radius: 4px;
 }
