@@ -1,39 +1,59 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { fetchMoviesById } from '../../api/fetchMovies';
 import '../../css/atlasflix.css';
 
 const MovieDetails = (props) => {
 	const movie = props.location.movProps;
-	console.log('mov', movie);
+	const [movieInfo, setMovieInfo] = useState({});
+
+	const handleSearchById = (id) => {
+		id = movie.imdbID;
+		fetchMoviesById(id)
+			.then((res) => {
+				res
+					.json()
+					.then((data) => {
+						setMovieInfo(data);
+					})
+					.catch((err) => console.log('Error', err));
+			})
+			.catch((err) => console.log('Error', err));
+	};
+
+	useEffect((id) => {
+		handleSearchById(id);
+	}, []);
+
 	return (
 		<div className='movies-container'>
 			<h1>Movie Information</h1>
 			<div className='row'>
 				<div className='column'>
-					<h2>{movie.Title}</h2>
-					<h4>{movie.Year}</h4>
+					<h2>{movieInfo.Title}</h2>
+					<h4>{movieInfo.Year}</h4>
 					<p>
-						<b>Released:</b> <i>{movie.Released}</i>
+						<b>Released:</b> <i>{movieInfo.Released}</i>
 					</p>
 					<p>
-						<b>Runtime:</b> <i>{movie.Runtime}</i>
+						<b>Runtime:</b> <i>{movieInfo.Runtime}</i>
 					</p>
 					<p>
-						<b>Genre:</b> <i>{movie.Genre}</i>
+						<b>Genre:</b> <i>{movieInfo.Genre}</i>
 					</p>
 					<p>
-						<b>Director:</b> <i>{movie.Director}</i>
+						<b>Director:</b> <i>{movieInfo.Director}</i>
 					</p>
 					<p>
-						<b>Writer:</b> <i>{movie.Writer}</i>
+						<b>Writer:</b> <i>{movieInfo.Writer}</i>
 					</p>
 					<p>
-						<b>Actors:</b> <i>{movie.Actors}</i>
+						<b>Actors:</b> <i>{movieInfo.Actors}</i>
 					</p>
 				</div>
 				<div className='column'>
-					<img src={movie.Poster} alt='' />
+					<img src={movieInfo.Poster} alt='' />
 				</div>
-				<div className='column'>{movie.Plot}</div>
+				<div className='column'>{movieInfo.Plot}</div>
 			</div>
 		</div>
 	);

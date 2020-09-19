@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { fetchMovies } from '../../api/fetchMovies';
 import { Link } from 'react-router-dom';
-import star from '../../assets/FA_star.svg.png';
+import star from '../../assets/like.png';
 import '../../css/atlasflix.css';
 
 export default class MoviesList extends Component {
@@ -37,24 +37,13 @@ export default class MoviesList extends Component {
 			.catch((err) => console.log('Error', err));
 	};
 
+	/* Handles the search state value of the component */
 	handleStoredSearch = () => {
 		window.localStorage.setItem(
 			'@atlasflix/search',
 			JSON.stringify(this.state.title)
 		);
 	};
-
-	// componentDidMount() {
-	// 	if (window.localStorage.length === 0) return;
-	// 	else {
-	// 		const fromStore = JSON.parse(
-	// 			window.localStorage.getItem('@atlasflix/search') || []
-	// 		);
-	// 		this.setState({
-	// 			title: fromStore
-	// 		});
-	// 	}
-	// }
 
 	componentWillUnmount() {
 		this.handleStoredSearch();
@@ -120,10 +109,10 @@ export default class MoviesList extends Component {
 										</div>
 										<div className='column'>
 											<img
-												width='10%'
+												width='20%'
 												src={star}
 												alt=''
-												onClick={this.handleStarClick(movie)}
+												//onClick={this.handleStarClick(movie)}
 											/>
 										</div>
 									</div>

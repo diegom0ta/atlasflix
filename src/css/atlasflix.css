@@ -32,11 +32,13 @@ body {
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 	overflow: auto;
 }
-
-a,
-a:hover {
+a {
 	color: rgb(167, 135, 255);
 	text-decoration: none;
+}
+
+a:hover {
+	color: rgb(176, 255, 72);
 }
 
 .text-field {
@@ -46,7 +48,7 @@ a:hover {
 	border-radius: 4px;
 	font-size: 16px;
 	background-color: white;
-	background-image: url('../assets/OOjs_UI_icon_search-rtl-progressive.svg.png');
+	background-image: url('../assets/search.png');
 	background-position: 10px 10px;
 	background-size: 25px 25px;
 	background-repeat: no-repeat;
@@ -78,28 +80,12 @@ main > div {
 }
 
 #result-container {
+	border: 5px;
+	border-color: rgb(167, 135, 255);
+	border-radius: 4px;
 }
 
 #favorites-container {
-}
-
-.button1 {
-	background-color: rgb(167, 135, 255);
-	border: none;
-	color: rgb(176, 255, 72);
-	padding: 17px 32px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 16px;
-	margin: 4px 2px;
-	cursor: pointer;
-	border-radius: 4px;
-	transition-duration: 0.4s;
-}
-
-.button1:hover {
-	background-color: rgb(128, 104, 235);
 }
 
 .favorites-list {
