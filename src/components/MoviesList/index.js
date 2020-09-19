@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { fetchMovies } from '../../api/fetchMovies';
+import { Link } from 'react-router-dom';
+import star from '../../assets/FA_star.svg.png';
 import '../../css/atlasflix.css';
 
 export default class MoviesList extends Component {
@@ -7,14 +9,16 @@ export default class MoviesList extends Component {
 		image: '',
 		favorites: [],
 		loading: false,
-		title: '',
-		movies: ''
+		title: JSON.parse(localStorage.getItem('@atlasflix/search')) || [],
+		movies: [],
+		errorMsg: '',
+		response: ''
 	};
 
 	/* Handles the search in input field,
 	fetching in live the information from the API,
 	triggered by onChange property */
-	handleSearch(e) {
+	handleSearch = (e) => {
 		const value = e.target.value;
 		fetchMovies(value)
 			.then((res) => {
@@ -23,28 +27,52 @@ export default class MoviesList extends Component {
 					.then((data) => {
 						this.setState({
 							title: value,
-							movies: data,
-							image: data.Poster
+							movies: data.Search,
+							errorMsg: data.Error,
+							response: data.Response
 						});
 					})
 					.catch((err) => console.log('Error', err));
 			})
 			.catch((err) => console.log('Error', err));
-	}
-
-	/* Adds result object from search in state array,
-	triggered by onClick button */
-	addFavorite = (e) => {
-		const favorite = this.state.movies;
-		this.setState({
-			favorites: [...this.state.favorites, favorite]
-		});
-		e.preventDefault();
 	};
 
-	favoritesData = () => {
-		var favorites = this.state.favorites;
-		return favorites;
+	handleStoredSearch = () => {
+		window.localStorage.setItem(
+			'@atlasflix/search',
+			JSON.stringify(this.state.title)
+		);
+	};
+
+	// componentDidMount() {
+	// 	if (window.localStorage.length === 0) return;
+	// 	else {
+	// 		const fromStore = JSON.parse(
+	// 			window.localStorage.getItem('@atlasflix/search') || []
+	// 		);
+	// 		this.setState({
+	// 			title: fromStore
+	// 		});
+	// 	}
+	// }
+
+	componentWillUnmount() {
+		this.handleStoredSearch();
+	}
+
+	/* Adds result object from search in state array if it's not null
+	and if it doesn't exists in the array, triggered by onClick button */
+	addFavorite = (movie) => {
+		if (!this.state.favorites.includes(movie)) {
+			this.setState({
+				favorites: [...this.state.favorites, movie]
+			});
+		} else return;
+		console.log('favs', this.state.favorites);
+	};
+
+	handleStarClick = (e) => {
+		this.addFavorite(e);
 	};
 
 	render() {
@@ -63,34 +91,52 @@ export default class MoviesList extends Component {
 							value={this.state.title}
 							onChange={(e) => this.handleSearch(e)}
 						/>
-						<button
-							className='button1'
-							onClick={(e) => this.addFavorite(e)}
-							type='button'
-							title='Like!'
-						>
-							Like!
-						</button>
 					</form>
 				</div>
-				<main id='boxes'>
-					<div id='favorites-container'>
-						<h4>Favorites</h4>
-						<ul>
-							{this.state.favorites.map((fav) => (
-								<li key={fav.imdbID}>{fav.Title}</li>
-							))}
-						</ul>
-					</div>
+				<main id='box'>
 					<div id='result-container'>
-						<h2>{this.state.movies.Title}</h2>
-
-						<h4>{this.state.movies.Year}</h4>
-
-						<img src={this.state.image} alt='' />
+						{this.state.response !== 'False' ? (
+							this.state.movies.map((movie) => (
+								<div key={movie.imdbID}>
+									<Link
+										to={{
+											pathname: '/MovieDetails',
+											movProps: movie
+										}}
+									>
+										<h2>{movie.Title}</h2>
+									</Link>
+									<h4>{movie.Year}</h4>
+									<div className='row'>
+										<div className='column'>
+											<Link
+												to={{
+													pathname: '/MovieDetails',
+													movProps: movie
+												}}
+											>
+												<img src={movie.Poster} alt='' />
+											</Link>
+										</div>
+										<div className='column'>
+											<img
+												width='10%'
+												src={star}
+												alt=''
+												onClick={this.handleStarClick(movie)}
+											/>
+										</div>
+									</div>
+								</div>
+							))
+						) : (
+							<h2>{this.state.errorMsg}</h2>
+						)}
 					</div>
-					<div id='desc-container'>
-						<p>{this.state.movies.Plot}</p>
+					<div id='favorites-container'>
+						<Link to='/Favorites'>
+							<h3>Favorites</h3>
+						</Link>
 					</div>
 				</main>
 			</div>

@@ -15,9 +15,33 @@ body {
 	overflow: auto;
 }
 
+.favorites-container {
+	width: inherit;
+	height: 100vh;
+	background-color: rgb(132, 0, 255);
+	color: rgb(167, 135, 255);
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	overflow: auto;
+}
+
+.movies-container {
+	width: inherit;
+	height: 100vh;
+	background-color: rgb(132, 0, 255);
+	color: rgb(167, 135, 255);
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	overflow: auto;
+}
+
+a,
+a:hover {
+	color: rgb(167, 135, 255);
+	text-decoration: none;
+}
+
 .text-field {
 	border: 5px solid rgb(167, 135, 255);
-	width: 300px;
+	width: 320px;
 	box-sizing: border-box;
 	border-radius: 4px;
 	font-size: 16px;
@@ -31,7 +55,7 @@ body {
 }
 
 .text-field[type='text']:focus {
-	width: 50%;
+	width: 100%;
 }
 
 .page-title {
@@ -43,23 +67,20 @@ body {
 main > div {
 	float: left;
 	height: 100vh;
-	width: 27%;
+	width: 80%;
 	padding: 0 10px;
 }
 
-#boxes {
+#box {
 	content: '';
 	display: flex;
 	clear: both;
 }
 
-#favorites-container {
-}
-
 #result-container {
 }
 
-#desc-container {
+#favorites-container {
 }
 
 .button1 {
@@ -79,4 +100,18 @@ main > div {
 
 .button1:hover {
 	background-color: rgb(128, 104, 235);
+}
+
+.favorites-list {
+	width: 800px;
+	margin: 0 auto;
+}
+
+.row {
+	display: flex;
+}
+
+.column {
+	flex: 50%;
+	padding: 5px;
 }

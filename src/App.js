@@ -11,8 +11,16 @@ function App() {
 			<Route exact path='/'>
 				<Redirect to='/Home' />
 			</Route>
-			<Route exact path='/Favorites' component={Favorites} />
-			<Route exact path='/MovieDetails' component={MovieDetails} />
+			<Route
+				exact
+				path='/Favorites'
+				render={(props) => <Favorites {...props} isAuthed={true} />}
+			/>
+			<Route
+				exact
+				path='/MovieDetails'
+				render={(props) => <MovieDetails {...props} isAuthed={true} />}
+			/>
 		</Switch>
 	);
 }
