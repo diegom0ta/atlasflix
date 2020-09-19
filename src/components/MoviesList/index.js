@@ -39,8 +39,12 @@ export default class MoviesList extends Component {
 		this.setState({
 			favorites: [...this.state.favorites, favorite]
 		});
-		console.log('fav', this.state.favorites);
 		e.preventDefault();
+	};
+
+	favoritesData = () => {
+		var favorites = this.state.favorites;
+		return favorites;
 	};
 
 	render() {
@@ -69,13 +73,26 @@ export default class MoviesList extends Component {
 						</button>
 					</form>
 				</div>
-				<div className='result-container'>
-					<h2>{this.state.movies.Title}</h2>
+				<main id='boxes'>
+					<div id='favorites-container'>
+						<h4>Favorites</h4>
+						<ul>
+							{this.state.favorites.map((fav) => (
+								<li key={fav.imdbID}>{fav.Title}</li>
+							))}
+						</ul>
+					</div>
+					<div id='result-container'>
+						<h2>{this.state.movies.Title}</h2>
 
-					<h4>{this.state.movies.Year}</h4>
+						<h4>{this.state.movies.Year}</h4>
 
-					<img src={this.state.image} alt='' />
-				</div>
+						<img src={this.state.image} alt='' />
+					</div>
+					<div id='desc-container'>
+						<p>{this.state.movies.Plot}</p>
+					</div>
+				</main>
 			</div>
 		);
 	}

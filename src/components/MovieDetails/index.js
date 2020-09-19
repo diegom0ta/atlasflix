@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class MovieDetails extends Component {
-	render() {
-		return <h1>Movie Details</h1>;
-	}
-}
+const MovieDetails = () => {
+	return <h1>Movie Details</h1>;
+};
+
+export default MovieDetails;
