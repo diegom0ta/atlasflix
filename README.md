@@ -37,6 +37,10 @@ You will also see any lint errors in the console.
 - Fetch movie data from the API using the ID of the movie passed by props from the Movie List Component
 - Show selected movie information
 
+### Favorites Component Page
+
+- Show selected favorite movies list passed by props from the Movie List Component
+
 ## Framework
 
 ### React

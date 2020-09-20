@@ -6,6 +6,9 @@ const MovieDetails = (props) => {
 	const movie = props.location.movProps;
 	const [movieInfo, setMovieInfo] = useState({});
 
+	/* Handles the search ,
+	fetching complete movie information from the API,
+	triggered by useEffect */
 	const handleSearchById = (id) => {
 		id = movie.imdbID;
 		fetchMoviesById(id)

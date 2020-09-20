@@ -6,24 +6,8 @@ body {
 	padding: 0;
 }
 
-.home-container {
-	width: inherit;
-	height: 100vh;
-	background-color: rgb(132, 0, 255);
-	color: rgb(167, 135, 255);
-	font-family: Verdana, Geneva, Tahoma, sans-serif;
-	overflow: auto;
-}
-
-.favorites-container {
-	width: inherit;
-	height: 100vh;
-	background-color: rgb(132, 0, 255);
-	color: rgb(167, 135, 255);
-	font-family: Verdana, Geneva, Tahoma, sans-serif;
-	overflow: auto;
-}
-
+.home-container,
+.favorites-container,
 .movies-container {
 	width: inherit;
 	height: 100vh;
@@ -32,6 +16,7 @@ body {
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 	overflow: auto;
 }
+
 a {
 	color: rgb(167, 135, 255);
 	text-decoration: none;
