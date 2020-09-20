@@ -4,7 +4,7 @@
 
 In the project directory, you can run:
 
-#### `npm/yarn install``
+#### `npm/yarn install`
 
 Install the dependencies from `package.json`.
 
